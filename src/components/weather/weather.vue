@@ -4,7 +4,7 @@
         <el-breadcrumb-item :to="{ path: '/dataShow' }">数据展示</el-breadcrumb-item>
         <el-breadcrumb-item>微气象</el-breadcrumb-item>
       </el-breadcrumb>
-      <div id="weatherCharts">
+      <div id="weatherCharts"  v-loading="loading">
 
       </div>
   </div>
@@ -17,13 +17,15 @@ export default {
       data: [],
       datalength: 0,
       limtLength: 50,
-      loop:null
+      loop:null,
+      loading:true
     };
   },
   mounted() {
     this.fetchdata()
       .then(({ data }) => {
         this.data = data.data[this.showindex].data;
+        this.loading = false;
         this.datalength =this.data.length;
         var newdata = this.data.slice(0, 50);
         var weatherC = this.$echarts.init(
@@ -46,7 +48,7 @@ export default {
               fontSize: 16,
               align: "right"
             },
-            left: "center"
+            left: "center",
           },
           tooltip: {
             trigger: "axis",
@@ -140,11 +142,9 @@ export default {
         weatherC.setOption(option);
         this.loop = setInterval(function () {
             this.limtLength++;
-            console.log(this.datalength - 1)
             if (this.limtLength > this.datalength - 1) {
                 this.limtLength = 50;
                 newdata = this.data.slice(0, 50);
-                
                 weatherC.setOption({
                     series: [{
                         data: newdata
