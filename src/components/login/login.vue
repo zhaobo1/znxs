@@ -42,6 +42,7 @@
     border-radius: 7px;
     padding: 70px 20px;
     box-sizing: border-box;
+    
     background: rgba(119, 118, 126, 0.5);
 }
 form{
