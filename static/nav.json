@@ -1,0 +1,43 @@
+[
+    {
+        "title":"任务管理",
+        "url":"/task",
+        "icon":"el-icon-tickets",
+        "children":[
+            {
+                "title":"人工任务",
+                "url":"people"
+            },
+            {
+                "title":"无人机任务",
+                "url":"airplane"
+            },
+            {
+                "title":"在线任务",
+                "url":"online"
+            }
+
+        ]
+    },
+    {
+        "title":"报警管理",
+        "url":"/posterror",
+        "icon":"el-icon-bell",
+        "children":[]
+    },
+    {
+        "title":"数据展示",
+        "url":"/dataShow",
+        "icon":"el-icon-document",
+        "children":[
+            {
+                "title":"微气象",
+                "url":"qixiang"
+            },
+            {
+                "title":"覆冰",
+                "url":"ice"
+            }
+        ]
+    }
+]
