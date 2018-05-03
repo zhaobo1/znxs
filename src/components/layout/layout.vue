@@ -3,7 +3,7 @@
   <el-header style="padding:0;background:#444">
       <el-row>
           <el-col :span="6">
-              <img src="static/img/loginlogo.png" id="logo" />
+              <img src="/static/img/loginlogo.png" id="logo" />
           </el-col>
           <el-col :span="18">
               <div class="userinfo">
@@ -89,7 +89,7 @@ export default {
     }
 };
 </script>
-<style>
+<style scoped>
 #logo {
 display: block;
   height: 60px;

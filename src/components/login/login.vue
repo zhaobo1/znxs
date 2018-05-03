@@ -1,110 +1,56 @@
 <template>
-<el-form ref="form" :model="form" label-width="80px">
-  <el-form-item label="活动名称">
-    <el-input v-model="form.name"></el-input>
-  </el-form-item>
-  <el-form-item label="活动区域">
-    <el-select v-model="form.region" placeholder="请选择活动区域">
-      <el-option label="区域一" value="shanghai"></el-option>
-      <el-option label="区域二" value="beijing"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="活动时间">
-    <el-col :span="11">
-      <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-    </el-col>
-    <el-col class="line" :span="2">-</el-col>
-    <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-    </el-col>
-  </el-form-item>
-  <el-form-item label="即时配送">
-    <el-switch v-model="form.delivery"></el-switch>
-  </el-form-item>
-  <el-form-item label="活动性质">
-    <el-checkbox-group v-model="form.type">
-      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-      <el-checkbox label="地推活动" name="type"></el-checkbox>
-      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-    </el-checkbox-group>
-  </el-form-item>
-  <el-form-item label="特殊资源">
-    <el-radio-group v-model="form.resource">
-      <el-radio label="线上品牌商赞助"></el-radio>
-      <el-radio label="线下场地免费"></el-radio>
-    </el-radio-group>
-  </el-form-item>
-  <el-form-item label="活动形式">
-    <el-input type="textarea" v-model="form.desc"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary">立即创建</el-button>
-    <el-button @click="addNum({num:10})">取消{{count}}</el-button>
-  </el-form-item>
-</el-form>
+<div id="form">
+  <div id="formbox">
+    <form action="">
+      <img src="/static/img/loginlogo.png" id="logo" />
+      <p>
+         <input type="text" v-model="username"> 
+      </p>
+      <p>
+        <input type="passworld" v-model="passworld"> 
+      </p>
+      <p align="center">
+        <el-button type="primary" style="width:80%">登录</el-button>
+      </p>
+    </form>
+  </div>
+  
+</div>
 </template>
 <script>
-import { mapState, mapGetters, mapMutations } from "vuex";
-export default {
-  data() {
-    return {
-      name: "zhaobo",
-      form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        }
-    };
-  },
-  //   computed:mapState({
-  //     //   status: state => state.loginStatus,
-  //       status:'loginStatus',//status:state => state.loginStatus
-  //     //要使用this ,必须是普通函数；
-  //       addName(state){
-  //           return state.loginStatus+this.name;
-  //       }
-  //   }),
-  computed: {
-    username() {
-      return "1212";
-    },
-    //   revlogin(){
-    //       return this.$store.getters.revloginStatus
-    //   },
-    ...mapState({
-      //   status:'loginStatus',
-      //   status: state => state.loginStatus,
-      status: "loginStatus",
-      count:'count',
-      //   要使用this ,必须是普通函数；
-      addName(state) {
-        return state.loginStatus + this.name;
+  export default{
+    data(){
+      return {
+        username:'',
+        passworld:''
       }
-    }),
-    ...mapGetters({
-      revlogin: "revloginStatus"
-    })
-  },
-  methods: {
-    //   addNum(){
-    //     //   this.$store.commit('addCount',{num:10})
-    //     this.$store.commit({
-    //         type:"addCount",
-    //         num:10
-    //     })
-    //   },
-      ...mapMutations({
-          addNum:'addCount'
-      })
+    }
   }
-};
-//如果计算属性和state中的属性一致，可以直接使用数组写法；mapState(['count','status'])
 </script>
-<style>
+<style scoped>
+#form{
+  height:100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/static/img/loginbg.png') no-repeat center/cover;
+}
+#formbox{
+    width: 430px;
+    height: 325px;
+    border-radius: 7px;
+    padding: 70px 20px;
+    box-sizing: border-box;
+    background: rgba(119, 118, 126, 0.5);
+}
+form{
+  position: relative;
+}
+#logo{
+  position: absolute;
+  left: 50%;
+  top:-70px;
+  transform: translate(-50%,-50%)
+}
 </style>

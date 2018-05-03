@@ -24,7 +24,7 @@ export default {
     this.fetchdata()
       .then(({ data }) => {
         this.data = data.data[this.showindex].data;
-        this.datalength = data.length;
+        this.datalength =this.data.length;
         var newdata = this.data.slice(0, 50);
         var weatherC = this.$echarts.init(
           document.getElementById("weatherCharts")
@@ -140,7 +140,8 @@ export default {
         weatherC.setOption(option);
         this.loop = setInterval(function () {
             this.limtLength++;
-            if (this.limtLength > this.dataLength - 1) {
+            console.log(this.datalength - 1)
+            if (this.limtLength > this.datalength - 1) {
                 this.limtLength = 50;
                 newdata = this.data.slice(0, 50);
                 
