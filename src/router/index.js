@@ -5,6 +5,7 @@ import Login from '@/components/login/login';
 import people from '@/components/task/people';
 import airplane from '@/components/task/airplane';
 import weather from '@/components/weather/weather';
+import map from '@/components/map/map';
 import store from './../store/store.js';
 import Nprogress from 'nprogress';
 import 'nprogress/nprogress.css'
@@ -20,6 +21,14 @@ var router = new Router({
       component:Login
     },
     {
+      path:'/map',
+      component:LayOut,
+      children:[{
+        path:'',
+        component:map
+      }]
+    },
+    {
       path:'/task',
       component:LayOut,
       children:[
@@ -27,7 +36,7 @@ var router = new Router({
           path:'',
           redirect:'people'
         },
-        {
+        { 
           path:"people",
           component:people
         },
@@ -81,7 +90,7 @@ router.beforeEach((to,from,next)=>{
     //判断即将进入的路由是否是/login;是重定向到task;不是直接next
     if(to.path==='/login')
     {
-      next('/task');
+      next('/map');
     }else{
       next()
     }
