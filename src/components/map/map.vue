@@ -44,7 +44,9 @@ export default {
       },
       fetchAll(){
           Promise.all([this.fetchArea(),this.fetchOneline()]).then((data)=>{
+              //实例化地图
               this.initMap(data[0].xichangpointer);
+              //实例化线路
               this.drawOneLine(data[1].lineJson);
           }).catch(err=>{
               this.$notify({
@@ -71,7 +73,7 @@ export default {
                 points.push(new TLngLat(elem[0], elem[1]));
             }
             //创建面对象
-            var polygon = new TPolygon(points, { strokeColor: "#00FFCF", strokeWeight: 4, strokeOpacity: 1, fillOpacity: 0 });
+            var polygon = new TPolygon(points, { strokeColor: "#2196F3", strokeWeight: 4, strokeOpacity: 1, fillOpacity: 0 });
             //向地图上添加面
             this.map.addOverLay(polygon);
       },

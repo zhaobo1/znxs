@@ -4,7 +4,7 @@ import Vue from 'vue'//引入Vue
 import App from './App'//引入App component组件
 import router from './router'//引入路由；
 import ElementUI from 'element-ui';
-import axios from 'axios';
+import axios from '@/util/http.js';
 import echarts from 'echarts';
 import 'element-ui/lib/theme-chalk/index.css';
 import store from './store/store.js';

@@ -82,9 +82,8 @@ var router = new Router({
 const WriteList = ['/login'];
 router.beforeEach((to,from,next)=>{
   Nprogress.start();
-  //判断是否登录
-  var islogin = store.state.loginStatus;
-  // alert(islogin)
+  //判断是否登录.获取存在本地的token值；
+  var islogin = localStorage.getItem('auth');
   if(islogin){
     //已经登录
     //判断即将进入的路由是否是/login;是重定向到task;不是直接next

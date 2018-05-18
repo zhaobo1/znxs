@@ -4,115 +4,131 @@
         <el-breadcrumb-item :to="{ path: '/task' }">任务管理</el-breadcrumb-item>
         <el-breadcrumb-item>人工任务</el-breadcrumb-item>
       </el-breadcrumb>
-    <el-table 
-      :data="peopleTaskData"
-      style="width:100%"
-      border
-      height="600"
-      v-loading="loading"
-      >
-    <el-table-column
-      type="index"
-      label="序号"
-      align="center"
-      width="100">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="线路"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="Startdate"
-      label="开始时间"
-      width="150"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="Enddate"
-      label="结束时间"
-      width="150"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="fuxiany"
-      label="护线员"
-      width="150"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="towerObj"
-      label="铁塔对象"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="seaObj"
-      label="巡视对象"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="time"
-      label="最近拍摄时间"
-      width="150"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="progress"
-      label="拍摄进度"
-      align="center"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      label="操作"
-      fixed="right"
-      width="150">
-      <template slot-scope="scope">
-        <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
-          type="text"
-          size="small">
-          记录
-        </el-button>
-        <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
-          type="text"
-          size="small">
-          上传图片
-        </el-button>
-        <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
-          type="text"
-          size="small">
-          已上传图片
-        </el-button>
-      </template>
-    </el-table-column>
+    <el-table :data="tableData" style="width:100%" border height="550" v-loading="loading">
+      <el-table-column type='selection'></el-table-column>
+      <el-table-column align='center' prop='lineName' label='线路名称'></el-table-column>
+      <el-table-column align='center' prop='towerNumber' label='杆塔号'></el-table-column>
+      <el-table-column align='center' prop='inspectDate' label='巡检日期' width='110'></el-table-column>
+      <el-table-column align='center' prop='voltageLevel' label='电压等级'></el-table-column>
+      <el-table-column align='center' prop='level' label='缺陷等级'></el-table-column>
+      <el-table-column align='center' label='缺陷描述' width='190' prop='description'>
+        <!-- <template slot-scope="scope">
+          <tablepic :row='scope.row' :index='scope.$index'></tablepic>
+        </template> -->
+      </el-table-column>
+      <el-table-column align='center' prop='part' label='缺陷部位'></el-table-column>
+      <el-table-column align='center' prop='team' label='巡检小组'></el-table-column>
+      <el-table-column align='center' label='状态' width='100'>
+        <template slot-scope='scope'>
+          <el-tag :type='scope.row.state | stateFilter' size='medium'>{{scope.row.state}}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column align='center' prop='taskType' label='任务类型'></el-table-column>
+      <el-table-column align='center' prop='inspectLength' label='巡检长度'></el-table-column>
+      <el-table-column align='center' prop='droneAircraft' label='无人机型号'></el-table-column>
+      <el-table-column align='center' prop='droneModel' label='无人机机型'></el-table-column>
+      <el-table-column align='center' prop='inspectDuring' label='滞空时间'></el-table-column>
+      <el-table-column align='center' prop='businessType' label='业务类型'></el-table-column>
+      <el-table-column label="操作" fixed="right" width='110' align='center'>
+        <template slot-scope="scope">
+          <el-button size='mini' type='plain' @click="handleModifyStatus(scope.row,'已审核')" v-if="scope.row.state=='未审核'" class='stateButton'>审核
+          </el-button>
+          <el-button size='mini' :type="scope.row.edit?'success':'plain'" @click="handleEditRow(scope.row)" v-if='scope.row.picture==null'>
+            {{scope.row.edit?'完成':'编辑'}}
+          </el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
+    <el-pagination
+      class="pull-right clearfix"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="pageNum"
+      :page-sizes="pageSizesList"
+      :page-size="pagesize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="totalDataNumber"
+      background
+    >
+    </el-pagination>
   </div>
 </template>
 <script>
+import ApiUrl from '@/Api/api.js';
 export default {
   data(){
     return {
-      peopleTaskData:[],
-      loading:true
+      loading:true,
+      pageNum:1,
+      pagesize:10,
+      pageSizesList: [10, 20, 30, 40, 50],
+      totalDataNumber:0,
+      tableData: []//返回的结果集合,
+    }
+  },
+  computed: {
+    tableParams() {
+        return ({
+          "pageSize": this.pagesize,//每页显示条数
+          "pageNum": this.pageNum,//当前页码
+          "orderBy": 'string',
+          "data": {
+            "dateFrom": '',
+            "dateTo": '',
+            "typeList": []
+          }
+        });
     }
   },
   created () {
-    this.$axios.get('https://www.easy-mock.com/mock/5acad68fe416f67736f0284e/example/peopleTaskdata').then(({data})=>{
-      this.peopleTaskData = data.data;
-      this.loading = false;
-    }).catch((err)=>{
-
-    })
+    this.getTabledata();
   },
-  beforeRouteEnter(to,from,next){
+  filters: {
+    stateFilter(state) {
+      const stateMap = {
+        '已审核': 'success',
+        '未审核': 'warning'
+      }
+      return stateMap[state];
+    }
+  },
+  methods: {
+    getTabledata(){
+        this.$axios.post(ApiUrl.fetchtableData,this.tableParams)
+        .then(({data})=>{
+          console.log(data.result.data)
+          this.tableData = data.result.data;
+          this.totalDataNumber = data.result.totalCount;
+          this.loading = false;
+        }).catch((err)=>{
 
-    next();
+        })
+    },
+    handleSizeChange(val){
+      this.pagesize = val;
+      this.getTabledata();
+    },
+    handleCurrentChange(val){
+      this.pageNum = val;
+      this.getTabledata();
+    }
   }
 }
 </script>
-<style>;
+<style scope>;
+   .stateButton {
+    background: #4876FF !important;
+    color: white !important;
+    border: none !important;
+  }
 
+  .stateButton:hover {
+    color: white !important;
+  }
+  .el-button+.el-button{
+    margin-left: 0;
+    margin-top: 4px;
+  }
 
 </style>

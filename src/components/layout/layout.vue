@@ -73,11 +73,8 @@ export default {
       loginOutfn(str){
           if(str==='loginout')
           {
-                this.$store.dispatch({
-                    type:'loginOutAction'
-                }).then(()=>{
-                    this.$router.push({path:'/login'})
-                })
+                localStorage.removeItem('auth');
+                this.$router.push({path:'/login'})
           }
       },
       handleClose(key, keyPath) {
