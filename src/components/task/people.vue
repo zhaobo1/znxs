@@ -116,7 +116,7 @@ export default {
   }
 }
 </script>
-<style scope>;
+<style scoped>;
    .stateButton {
     background: #4876FF !important;
     color: white !important;
