@@ -1,12 +1,12 @@
 <template>
   <div>
-      <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px;border-left: 3px solid #2196f3;padding-left: 7px;">
-        <el-breadcrumb-item :to="{ path: '/task' }">任务管理</el-breadcrumb-item>
-        <el-breadcrumb-item>人工任务</el-breadcrumb-item>
-      </el-breadcrumb>
-      <div>
-        <search></search>
-      </div>
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px;border-left: 3px solid #2196f3;padding-left: 7px;">
+      <el-breadcrumb-item :to="{ path: '/task' }">任务管理</el-breadcrumb-item>
+      <el-breadcrumb-item>人工任务</el-breadcrumb-item>
+    </el-breadcrumb>
+    <div>
+      <search></search>
+    </div>
     <el-table :data="tableData" style="width:100%" border height="500" v-loading="loading">
       <el-table-column type='selection'></el-table-column>
       <el-table-column align='center' prop='lineName' label='线路名称'></el-table-column>
@@ -43,43 +43,35 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      class="pull-right clearfix"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="pageNum"
-      :page-sizes="pageSizesList"
-      :page-size="pagesize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="totalDataNumber"
-      background
-    >
+    <el-pagination class="pull-right clearfix" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageNum"
+      :page-sizes="pageSizesList" :page-size="pagesize" layout="total, sizes, prev, pager, next, jumper" :total="totalDataNumber"
+      background>
     </el-pagination>
   </div>
 </template>
 <script>
-import ApiUrl from '@/Api/api.js';
-import search from '@/components/search/search.vue';
-import bus from '@/busEvent/bus.js';
-export default {
-  data(){
-    return {
-      loading:true,
-      pageNum:1,
-      pagesize:10,
-      pageSizesList: [10, 20, 30, 40, 50],
-      totalDataNumber:0,
-      tableData: []//返回的结果集合,
-    }
-  },
-  components: {
-    search,
-  },
-  computed: {
-    tableParams() {
+  import ApiUrl from '@/Api/api.js';
+  import search from '@/components/search/search.vue';
+  import bus from '@/busEvent/bus.js';
+  export default {
+    data() {
+      return {
+        loading: true,
+        pageNum: 1,
+        pagesize: 10,
+        pageSizesList: [10, 20, 30, 40, 50],
+        totalDataNumber: 0,
+        tableData: [] //返回的结果集合,
+      }
+    },
+    components: {
+      search,
+    },
+    computed: {
+      tableParams() {
         return ({
-          "pageSize": this.pagesize,//每页显示条数
-          "pageNum": this.pageNum,//当前页码
+          "pageSize": this.pagesize, //每页显示条数
+          "pageNum": this.pageNum, //当前页码
           "orderBy": 'string',
           "data": {
             "dateFrom": '',
@@ -87,49 +79,53 @@ export default {
             "typeList": []
           }
         });
-    }
-  },
-  mounted () {
-    this.getTabledata();
-    bus.$on('searchfn',function(plyload){
-      var params = Object.assign(this.tableParams,plyload);
-      this.getTabledata();
-    }.bind(this))
-  },
-  filters: {
-    stateFilter(state) {
-      const stateMap = {
-        '已审核': 'success',
-        '未审核': 'warning'
       }
-      return stateMap[state];
-    }
-  },
-  methods: {
-    getTabledata(){
-        this.$axios.post(ApiUrl.fetchtableData,this.tableParams)
-        .then(({data})=>{
-          console.log(data.result.data)
-          this.tableData = data.result.data;
-          this.totalDataNumber = data.result.totalCount;
-          this.loading = false;
-        }).catch((err)=>{
+    },
+    mounted() {
+      this.getTabledata();
+      bus.$on('searchfn', function (plyload) {
+        Object.assign(this.tableParams, plyload);
+        this.getTabledata();
+      }.bind(this))
+    },
+    filters: {
+      stateFilter(state) {
+        const stateMap = {
+          '已审核': 'success',
+          '未审核': 'warning'
+        }
+        return stateMap[state];
+      }
+    },
+    methods: {
+      getTabledata() {
+        this.$axios.post(ApiUrl.fetchtableData, this.tableParams)
+          .then(({
+            data
+          }) => {
+            console.log(data.result.data)
+            this.tableData = data.result.data;
+            this.totalDataNumber = data.result.totalCount;
+            this.loading = false;
+          }).catch((err) => {
 
-        })
-    },
-    handleSizeChange(val){
-      this.pagesize = val;
-      this.getTabledata();
-    },
-    handleCurrentChange(val){
-      this.pageNum = val;
-      this.getTabledata();
+          })
+      },
+      handleSizeChange(val) {
+        this.pagesize = val;
+        this.getTabledata();
+      },
+      handleCurrentChange(val) {
+        this.pageNum = val;
+        this.getTabledata();
+      }
     }
   }
-}
+
 </script>
-<style scoped>;
-   .stateButton {
+<style scoped>
+  ;
+  .stateButton {
     background: #4876FF !important;
     color: white !important;
     border: none !important;
@@ -138,7 +134,8 @@ export default {
   .stateButton:hover {
     color: white !important;
   }
-  .el-button+.el-button{
+
+  .el-button+.el-button {
     margin-left: 0;
     margin-top: 4px;
   }
