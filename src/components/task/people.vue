@@ -60,6 +60,7 @@
 <script>
 import ApiUrl from '@/Api/api.js';
 import search from '@/components/search/search.vue';
+import bus from '@/busEvent/bus.js';
 export default {
   data(){
     return {
@@ -88,8 +89,12 @@ export default {
         });
     }
   },
-  created () {
+  mounted () {
     this.getTabledata();
+    bus.$on('searchfn',function(plyload){
+      var params = Object.assign(this.tableParams,plyload);
+      this.getTabledata();
+    }.bind(this))
   },
   filters: {
     stateFilter(state) {
