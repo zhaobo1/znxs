@@ -2,7 +2,9 @@
 <div id="s_form">
     <el-row>
         <el-col :sm="2" :xs="2">
-            asds
+            <div>
+                索引条件
+            </div>
         </el-col>
         <el-col :sm="22" :xs="22">
         <el-form class="s_form" ref="s_form"  :model="s_form" :inline="true">
@@ -102,8 +104,8 @@
                 </el-row>
             </el-col>
             <el-col :sm="2" :xs="2">
-                <el-form-item size="small">
-                    <el-button type="primary" @click="onSubmit">搜索</el-button>
+                <el-form-item>
+                    <el-button type="primary" icon="el-icon-search" style="transform: translateY(50%);" @click="onSubmit">搜索</el-button>
                 </el-form-item>
             </el-col>
         </el-row>
