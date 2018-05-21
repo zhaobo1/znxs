@@ -4,14 +4,18 @@ import Vue from 'vue'//引入Vue
 import App from './App'//引入App component组件
 import router from './router'//引入路由；
 import ElementUI from 'element-ui';
+import {Message} from 'element-ui';
 import axios from '@/util/http.js';
 import echarts from 'echarts';
 import 'element-ui/lib/theme-chalk/index.css';
 import store from './store/store.js';
+import Api from '@/Api/api.js'; 
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
+Vue.prototype.$baseURL = Api.baseURL;
+Vue.prototype.$Message = Message;
 Vue.prototype.$echarts = echarts;
 /* eslint-disable no-new */
 new Vue({

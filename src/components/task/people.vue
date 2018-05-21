@@ -4,6 +4,9 @@
         <el-breadcrumb-item :to="{ path: '/task' }">任务管理</el-breadcrumb-item>
         <el-breadcrumb-item>人工任务</el-breadcrumb-item>
       </el-breadcrumb>
+      <div>
+        <search></search>
+      </div>
     <el-table :data="tableData" style="width:100%" border height="550" v-loading="loading">
       <el-table-column type='selection'></el-table-column>
       <el-table-column align='center' prop='lineName' label='线路名称'></el-table-column>
@@ -56,6 +59,7 @@
 </template>
 <script>
 import ApiUrl from '@/Api/api.js';
+import search from '@/components/search/search.vue';
 export default {
   data(){
     return {
@@ -66,6 +70,9 @@ export default {
       totalDataNumber:0,
       tableData: []//返回的结果集合,
     }
+  },
+  components: {
+    search,
   },
   computed: {
     tableParams() {
