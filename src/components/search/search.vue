@@ -2,8 +2,9 @@
 <div id="s_form">
     <el-row>
         <el-col :sm="2" :xs="2">
-            <div>
-                索引条件
+            <div class="titles">
+                <p>搜索</p>
+                <p>条件</p>
             </div>
         </el-col>
         <el-col :sm="22" :xs="22">
@@ -271,5 +272,13 @@ export default {
   padding: 5px;
   margin-bottom: 10px;
   border-radius: 3px;
+}
+.titles{
+    text-align: center;
+    transform: translateY(50%);
+}
+.titles p{
+    font-size: 18px;
+    font-weight: bold
 }
 </style>

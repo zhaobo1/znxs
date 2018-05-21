@@ -7,7 +7,7 @@
       <div>
         <search></search>
       </div>
-    <el-table :data="tableData" style="width:100%" border height="550" v-loading="loading">
+    <el-table :data="tableData" style="width:100%" border height="500" v-loading="loading">
       <el-table-column type='selection'></el-table-column>
       <el-table-column align='center' prop='lineName' label='线路名称'></el-table-column>
       <el-table-column align='center' prop='towerNumber' label='杆塔号'></el-table-column>
