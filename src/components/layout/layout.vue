@@ -7,10 +7,12 @@
         </el-col>
         <el-col :span="18">
           <div class="userinfo">
-            <el-dropdown @command="loginOutfn">
+            <el-dropdown @command="handleMy">
               <img src="static/img/userhead.jpg" alt="" class="userhead">
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="loginout">退出</el-dropdown-item>
+                <el-dropdown-item command="seting">设置</el-dropdown-item>
+                <el-dropdown-item command="changeTheme">切换主题</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -49,6 +51,17 @@
         <el-button type="primary" @click="realyout">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog title="提示" :visible.sync="themeVisible" width="30%" center>
+      <span>主题切换</span>
+      <br>
+      <el-radio v-model="radio" label="2F663D">2F663D</el-radio>
+      <el-radio v-model="radio" label="2D8E10">2D8E10</el-radio>
+      <el-radio v-model="radio" label="4056FF">4056FF</el-radio>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="themeVisible = false">取 消</el-button>
+        <el-button type="primary" @click="changeThemeSure">切 换</el-button>
+      </span>
+    </el-dialog>
   </el-container>
 </template>
 <script>
@@ -62,7 +75,9 @@
       return {
         isCollapse: false,
         nav: [],
-        centerDialogVisible: false
+        centerDialogVisible: false,
+        themeVisible: false,
+        radio: '2F663D'
       };
     },
     created() {
@@ -90,10 +105,33 @@
           path: "/login"
         });
       },
-      loginOutfn(str) {
+      handleMy(str) {
         if (str === "loginout") {
           this.centerDialogVisible = true;
         }
+        if (str === "seting") {
+          this.$router.push('/seting')
+        }
+        if (str === 'changeTheme') {
+          //切换主题
+          this.themeVisible = true;
+        }
+      },
+      changeThemeSure() {
+        switch (this.radio) {
+          case "2F663D":
+            document.body.className = 'custom-2F663D';
+            break;
+          case "2D8E10":
+            document.body.className = 'custom-2D8E10';
+            break;
+          case "4056FF":
+            document.body.className = 'custom-4056FF';
+            break;
+          default:
+            break;
+        }
+        this.themeVisible = false;
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
@@ -148,5 +186,9 @@
     padding: 0 40px;
   }
 
-</style>
+  .el-color-picker__trigger {
+    margin-top: 11px;
+    border: none;
+  }
 
+</style>
