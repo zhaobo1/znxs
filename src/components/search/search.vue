@@ -1,16 +1,17 @@
 <template>
   <div id="s_form">
     <el-row>
-      <el-col :sm="2" :xs="2">
-        <div class="titles">
-          <p>搜索</p>
-          <p>条件</p>
-        </div>
-      </el-col>
-      <el-col :sm="22" :xs="22">
+      <el-col :xs="22" :sm="22">
         <el-form class="s_form" ref="s_form" :model="s_form" :inline="true">
           <el-row>
-            <el-col :sm="22" :xs="22">
+            <!-- 
+            xs < 768
+            sm ≥ 759
+            md ≥ 992
+            lg ≥ 1200
+            xl ≥ 1920 
+            -->
+            <el-col :xs="21" :sm="21" :xl="15">
               <el-row>
                 <el-col :sm="8" :xs="8">
                   <el-form-item size="mini">
@@ -73,13 +74,17 @@
                 </el-col>
               </el-row>
             </el-col>
-            <el-col :sm="2" :xs="2">
+            <el-col :xs="3" :sm="3">
               <el-form-item>
-                <el-button type="primary" icon="el-icon-search" style="transform: translateY(50%);" @click="onSubmit">搜索</el-button>
+                <el-button type="primary" icon="el-icon-search" style="font-size:28px" @click="onSubmit"></el-button>
               </el-form-item>
             </el-col>
           </el-row>
         </el-form>
+      </el-col>
+      <el-col :sm="2" :xs="2">
+        <el-button type="success" plain size="mini" icon="el-icon-upload2" style="float:right" @click="uploadfile">上传文档</el-button>
+        <el-button type="success" plain size="mini" icon="el-icon-upload2" style="margin:2px 0;float: right;">上传图片</el-button>
       </el-col>
     </el-row>
   </div>
@@ -247,6 +252,9 @@
           }
         };
         bus.$emit("searchfn", obj);
+      },
+      uploadfile(){
+          this.$router.push('/upload');
       }
     }
   };
@@ -254,6 +262,10 @@
 </script>
 
 <style scoped>
+
+.el-form-item{
+  margin-bottom: 0;
+}
   #s_form {
     border: 1px solid #dcdfe6;
     padding: 5px;
@@ -272,3 +284,4 @@
   }
 
 </style>
+

@@ -75,6 +75,26 @@ var router = new Router({
           }
         },
       ]
+    },
+    {
+      path:'/upload',
+      component:LayOut,
+      children:[
+        {
+          path:'',
+          component:resolve=>require(['@/components/upload/upload.vue'],resolve)
+        }
+      ]
+    },
+    {
+      path:'/seting',
+      component:LayOut,
+      children:[
+        {
+          path:'',
+          component:resolve=>require(['@/components/seting/seting.vue'],resolve)
+        }
+      ]
     }
   ]
 });

@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "wrapCss":"gulp css-wrap"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -18,6 +19,11 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.4",
+    "gulp-css-wrap": "^0.1.2",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",

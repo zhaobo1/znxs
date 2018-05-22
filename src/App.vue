@@ -9,6 +9,9 @@ export default {
 }
 </script>
 <style>
+@import './assets/css/theme/2D8E10/index.css';
+@import './assets/css/theme/2F663D/index.css';
+@import './assets/css/theme/4056FF/index.css';
 *{
   margin: 0;padding: 0
 }
