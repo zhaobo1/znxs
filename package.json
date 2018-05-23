@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "wrapCss": "gulp css-wrap",
+    "wrapCss": "gulp css-wrap move",
     "dll": "webpack --config ./webpack.dll.config.js"
   },
   "dependencies": {
@@ -39,6 +39,7 @@
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.4",
     "gulp-css-wrap": "^0.1.2",
+    "gulp-rename": "^1.2.3",
     "html-webpack-plugin": "^2.30.1",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.9.0",
