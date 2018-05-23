@@ -1,14 +1,14 @@
 <template>
   <el-container style="height:100%">
-    <el-header style="padding:0;background:#444">
+    <el-header style="padding:0">
       <el-row>
         <el-col :span="6">
-          <img src="/static/img/loginlogo.png" id="logo" />
+          <img src="@/assets/img/loginlogo.png" id="logo" />
         </el-col>
         <el-col :span="18">
           <div class="userinfo">
             <el-dropdown @command="handleMy">
-              <img src="static/img/userhead.jpg" alt="" class="userhead">
+              <img src="@/assets/img/userhead.jpg" alt="" class="userhead">
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="loginout">退出</el-dropdown-item>
                 <el-dropdown-item command="seting">设置</el-dropdown-item>
@@ -54,9 +54,9 @@
     <el-dialog title="提示" :visible.sync="themeVisible" width="30%" center>
       <span>主题切换</span>
       <br>
-      <el-radio v-model="radio" label="2F663D">2F663D</el-radio>
-      <el-radio v-model="radio" label="2D8E10">2D8E10</el-radio>
-      <el-radio v-model="radio" label="4056FF">4056FF</el-radio>
+      <el-radio v-model="radio" label="2F663D" style="color:#2f663d">2F663D</el-radio>
+      <el-radio v-model="radio" label="2D8E10" style="color:#2D8E10">2D8E10</el-radio>
+      <el-radio v-model="radio" label="4056FF" style="color:#4056FF">4056FF</el-radio>
       <span slot="footer" class="dialog-footer">
         <el-button @click="themeVisible = false">取 消</el-button>
         <el-button type="primary" @click="changeThemeSure">切 换</el-button>
@@ -143,7 +143,25 @@
   };
 
 </script>
-<style scoped>
+
+<style scoped lang="scss">
+  @import '../../../static/scss/globalVariable.scss';
+  .el-header {
+    @include headerBgcolor($theme_2F663D)
+  }
+
+  .custom-2F663D .el-header {
+    @include headerBgcolor($theme_2F663D)
+  }
+
+  .custom-2D8E10 .el-header {
+    @include headerBgcolor($theme_2D8E10)
+  }
+
+  .custom-4056FF .el-header {
+    @include headerBgcolor($theme_4056FF)
+  }
+
   #logo {
     display: block;
     height: 60px;
@@ -162,8 +180,25 @@
     right: 0;
     text-align: center;
     cursor: pointer;
-    background-color: #2196f3;
     color: #fff;
+  }
+
+  .custom-2D8E10 {
+    #showOrhide {
+      background: #2D8E10
+    }
+  }
+
+  .custom-4056FF {
+    #showOrhide {
+      background: #4056FF
+    }
+  }
+
+  .custom-2F663D {
+    #showOrhide {
+      background: #2F663D
+    }
   }
 
   .userinfo {

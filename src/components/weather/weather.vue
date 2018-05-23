@@ -28,7 +28,7 @@ export default {
         this.loading = false;
         this.datalength =this.data.length;
         var newdata = this.data.slice(0, 50);
-        var weatherC = this.$echarts.init(
+        var weatherC = echarts.init(
           document.getElementById("weatherCharts")
         );
         var option = {

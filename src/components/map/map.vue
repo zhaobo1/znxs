@@ -10,6 +10,7 @@
 </template>
 <script>
 import ApiUrl from '@/Api/api.js';
+import towericon from '@/assets/img/ta.png';
 export default {
   data () {
       return {
@@ -82,7 +83,7 @@ export default {
           for (var i = 0; i < linearr.length; i++) {
             var oneline = linearr[i];
             var oneobj = [];
-            this.g_icon14 = this.iconObjfn('/static/img/ta.png',30,40,15,15);
+            this.g_icon14 = this.iconObjfn(towericon,30,40,15,15);
             for(let j = 0;j<oneline.pointer.length;j++)
             {
                 var elem = oneline.pointer[j];

@@ -1,11 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import LayOut from '@/components/layout/layout';
-import Login from '@/components/login/login';
-import people from '@/components/task/people';
-import airplane from '@/components/task/airplane';
-import weather from '@/components/weather/weather';
-import map from '@/components/map/map';
 import store from './../store/store.js';
 import Nprogress from 'nprogress';
 import 'nprogress/nprogress.css'
@@ -18,19 +12,19 @@ var router = new Router({
     },
     {
       path:'/login',
-      component:Login
+      component:resolve=>require(['@/components/login/login'],resolve)
     },
     {
       path:'/map',
-      component:LayOut,
+      component:resolve=>require(['@/components/layout/layout'],resolve),
       children:[{
         path:'',
-        component:map
+        component:resolve=>require(['@/components/map/map'],resolve)
       }]
     },
     {
       path:'/task',
-      component:LayOut,
+      component:resolve=>require(['@/components/layout/layout'],resolve),
       children:[
         {
           path:'',
@@ -38,11 +32,11 @@ var router = new Router({
         },
         { 
           path:"people",
-          component:people
+          component:resolve=>require(['@/components/task/people'],resolve)
         },
         {
           path:"airplane",
-          component:airplane
+          component:resolve=>require(['@/components/task/airplane'],resolve)
         },
         {
           path:"online",
@@ -54,11 +48,11 @@ var router = new Router({
       ]
     },{
       path:'/posterror',
-      component:LayOut
+      component:resolve=>require(['@/components/layout/layout'],resolve)
     },
     {
       path:'/dataShow',
-      component:LayOut,
+      component:resolve=>require(['@/components/layout/layout'],resolve),
       children:[
         {
           path:'',
@@ -66,7 +60,7 @@ var router = new Router({
         },
         {
           path:'qixiang',
-          component:weather
+          component:resolve=>require(['@/components/weather/weather'],resolve)
         },
         {
           path:'ice',
@@ -78,7 +72,7 @@ var router = new Router({
     },
     {
       path:'/upload',
-      component:LayOut,
+      component:resolve=>require(['@/components/layout/layout'],resolve),
       children:[
         {
           path:'',
@@ -88,7 +82,7 @@ var router = new Router({
     },
     {
       path:'/seting',
-      component:LayOut,
+      component:resolve=>require(['@/components/layout/layout'],resolve),
       children:[
         {
           path:'',

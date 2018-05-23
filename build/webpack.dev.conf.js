@@ -64,7 +64,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    //dll
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('../vendor-manifest.json')
+    })
   ]
 })
 

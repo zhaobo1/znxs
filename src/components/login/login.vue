@@ -106,7 +106,7 @@ import ApiUrl from '@/Api/api.js';
     position: relative;
     width: 100%;
     height: 100%;
-    background: url('/static/img/loginBg.jpg') no-repeat;
+    background: url('../../assets/img/loginBg.jpg') no-repeat;
     background-size: cover;
   }
 

@@ -7,7 +7,6 @@ import ElementUI from 'element-ui';
 import './variables.scss';//自定义主题皮肤，不可动态选择；
 import {Message} from 'element-ui';
 import axios from '@/util/http.js';
-import echarts from 'echarts';
 import store from './store/store.js';
 import Api from '@/Api/api.js'; 
 Vue.use(ElementUI)
@@ -16,7 +15,6 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 Vue.prototype.$baseURL = Api.baseURL;
 Vue.prototype.$Message = Message;
-Vue.prototype.$echarts = echarts;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
