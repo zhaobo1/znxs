@@ -4,7 +4,10 @@ import Vue from 'vue'//引入Vue
 import App from './App'//引入App component组件
 import router from './router'//引入路由；
 import ElementUI from 'element-ui';
-import './variables.scss';//自定义主题皮肤，不可动态选择；
+// import './variables.scss';
+//这里导入会是的app.css体积过大，不太改动的资源不必打包到app.css中；
+//使用cdn是一个合适的选择；
+//自定义主题皮肤，不可动态选择；
 import {Message} from 'element-ui';
 import axios from '@/util/http.js';
 import store from './store/store.js';

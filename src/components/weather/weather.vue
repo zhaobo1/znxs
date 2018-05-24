@@ -1,10 +1,10 @@
 <template>
   <div>
-      <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px;border-left: 3px solid #2196f3;padding-left: 7px;">
+      <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/dataShow' }">数据展示</el-breadcrumb-item>
         <el-breadcrumb-item>微气象</el-breadcrumb-item>
       </el-breadcrumb>
-      <div id="weatherCharts"  v-loading="loading">
+      <div id="weatherCharts"  v-loading="loading" style="height:400px">
 
       </div>
   </div>

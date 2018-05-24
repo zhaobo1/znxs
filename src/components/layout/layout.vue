@@ -3,7 +3,7 @@
     <el-header style="padding:0">
       <el-row>
         <el-col :span="6">
-          <img src="@/assets/img/loginlogo.png" id="logo" />
+          <img src="@/assets/img/loginlogo.png" id="logo" style="" />
         </el-col>
         <el-col :span="18">
           <div class="userinfo">
@@ -54,9 +54,9 @@
     <el-dialog title="提示" :visible.sync="themeVisible" width="30%" center>
       <span>主题切换</span>
       <br>
-      <el-radio v-model="radio" label="2F663D" style="color:#2f663d">2F663D</el-radio>
       <el-radio v-model="radio" label="2D8E10" style="color:#2D8E10">2D8E10</el-radio>
       <el-radio v-model="radio" label="4056FF" style="color:#4056FF">4056FF</el-radio>
+      <el-radio v-model="radio" label="FF40B6" style="color:#FF40B6">FF40B6</el-radio>
       <span slot="footer" class="dialog-footer">
         <el-button @click="themeVisible = false">取 消</el-button>
         <el-button type="primary" @click="changeThemeSure">切 换</el-button>
@@ -77,7 +77,7 @@
         nav: [],
         centerDialogVisible: false,
         themeVisible: false,
-        radio: '2F663D'
+        radio: '2D8E10'
       };
     },
     created() {
@@ -94,6 +94,9 @@
         .catch(err => {
           cosnole.log(err);
         });
+    },
+    mounted() {
+      document.body.className = 'custom-2D8E10';
     },
     methods: {
       handleOpen(key, keyPath) {
@@ -119,14 +122,15 @@
       },
       changeThemeSure() {
         switch (this.radio) {
-          case "2F663D":
-            document.body.className = 'custom-2F663D';
-            break;
           case "2D8E10":
+
             document.body.className = 'custom-2D8E10';
             break;
           case "4056FF":
             document.body.className = 'custom-4056FF';
+            break;
+          case "FF40B6":
+            document.body.className = 'custom-FF40B6';
             break;
           default:
             break;
@@ -144,14 +148,10 @@
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   @import '../../../static/scss/globalVariable.scss';
   .el-header {
-    @include headerBgcolor($theme_2F663D)
-  }
-
-  .custom-2F663D .el-header {
-    @include headerBgcolor($theme_2F663D)
+    @include headerBgcolor($theme_2D8E10)
   }
 
   .custom-2D8E10 .el-header {
@@ -162,16 +162,16 @@
     @include headerBgcolor($theme_4056FF)
   }
 
+  .custom-FF40B6 .el-header {
+    @include headerBgcolor($theme_FF40B6)
+  }
+
   #logo {
     display: block;
-    height: 60px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 7px;
   }
-
-  #infobar {
-    height: 50px;
-    background-color: #555;
-  }
-
   #showOrhide {
     width: 100%;
     height: 20px;
@@ -179,6 +179,8 @@
     top: 0;
     right: 0;
     text-align: center;
+    background: #2D8E10;
+    border-top:1px solid #fff;
     cursor: pointer;
     color: #fff;
   }
@@ -195,9 +197,9 @@
     }
   }
 
-  .custom-2F663D {
+  .custom-FF40B6 {
     #showOrhide {
-      background: #2F663D
+      background: #FF40B6
     }
   }
 
@@ -225,5 +227,27 @@
     margin-top: 11px;
     border: none;
   }
-
+  // 面包屑样式
+   .custom-2D8E10{
+     .el-breadcrumb{
+       margin-bottom:10px;
+       border-left: 3px solid #2D8E10;
+       padding-left: 7px;
+     }
+   }
+  .custom-4056FF{
+     .el-breadcrumb{
+       margin-bottom:10px;
+       border-left: 3px solid #4056FF;
+       padding-left: 7px;
+     }
+   }
+   .custom-FF40B6{
+     .el-breadcrumb{
+       margin-bottom:10px;
+       border-left: 3px solid #FF40B6;
+       padding-left: 7px;
+     }
+   }
 </style>
+

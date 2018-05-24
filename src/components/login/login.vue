@@ -2,8 +2,8 @@
   <div class="container">
     <div class='test2'></div>
     <div class='wrapper'>
-      <h1>翼管家</h1>
-      <h3>乐山平原及丘陵地区无人机巡检报告</h3>
+      <h1>美洽</h1>
+      <h3>网页在线客服系统</h3>
       <el-form :model='loginInfo' status-icon :rules='loginRules' label-width='80px' class='myform' ref='loginform'>
         <el-form-item class='form-item' prop='username'>
           <span class='labelSpan'>用户名</span>

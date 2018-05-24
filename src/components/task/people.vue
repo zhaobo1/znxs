@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px;border-left: 3px solid #2196f3;padding-left: 7px;">
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="">
       <el-breadcrumb-item :to="{ path: '/task' }">任务管理</el-breadcrumb-item>
       <el-breadcrumb-item>人工任务</el-breadcrumb-item>
     </el-breadcrumb>
@@ -34,7 +34,7 @@
       <el-table-column align='center' prop='businessType' label='业务类型'></el-table-column>
       <el-table-column label="操作" fixed="right" width='110' align='center'>
         <template slot-scope="scope">
-          <el-button size='mini' type='plain' @click="handleModifyStatus(scope.row,'已审核')" v-if="scope.row.state=='未审核'" class='stateButton'>审核
+          <el-button size='mini' type='primary' @click="handleModifyStatus(scope.row,'已审核')" v-if="scope.row.state=='未审核'" class='stateButton'>审核
           </el-button>
           <el-button size='mini' :type="scope.row.edit?'success':'plain'" @click="handleEditRow(scope.row)" v-if='scope.row.picture==null'>
             {{scope.row.edit?'完成':'编辑'}}
@@ -124,15 +124,6 @@
 
 </script>
 <style scoped>
-  .stateButton {
-    background: #4876FF !important;
-    color: white !important;
-    border: none !important;
-  }
-
-  .stateButton:hover {
-    color: white !important;
-  }
 
   .el-button+.el-button {
     margin-left: 0;

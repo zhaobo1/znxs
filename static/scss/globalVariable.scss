@@ -1,6 +1,6 @@
-$theme_2F663D:#2F663D;
 $theme_2D8E10:#2D8E10;
 $theme_4056FF:#4056FF;
-@mixin headerBgcolor($color:#2F663D){
+$theme_FF40B6:#FF40B6;
+@mixin headerBgcolor($color:#2D8E10){
     background-color: $color;
 }

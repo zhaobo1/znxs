@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px;border-left: 3px solid #2196f3;padding-left: 7px;">
+    <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/task' }">任务管理</el-breadcrumb-item>
       <el-breadcrumb-item>无人机任务</el-breadcrumb-item>
     </el-breadcrumb>

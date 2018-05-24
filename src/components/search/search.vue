@@ -264,7 +264,7 @@
 <style scoped>
 
 .el-form-item{
-  margin-bottom: 0;
+  margin-bottom: 0!important;
 }
   #s_form {
     border: 1px solid #dcdfe6;
